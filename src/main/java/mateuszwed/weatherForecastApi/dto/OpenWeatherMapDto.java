@@ -1,23 +1,32 @@
 package mateuszwed.weatherForecastApi.dto;
 
-import java.math.BigDecimal;
-import java.util.List;
+import lombok.Getter;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+@Getter
 public class OpenWeatherMapDto {
+    OpenWeatherMapCity city;
     List<OpenWeatherMapList> list;
 }
 
+@Getter
 class OpenWeatherMapList {
-    OpenWeatherMapMain main;
-    OpenWeatherMapWind wind;
-}
-
-class OpenWeatherMapMain {
-    BigDecimal temp;
+    Date dt;
+    OpenWeatherMapTemperature temp;
+    BigDecimal speed;
     int pressure;
     int humidity;
 }
 
-class OpenWeatherMapWind {
-    BigDecimal speed;
+@Getter
+class OpenWeatherMapTemperature {
+    BigDecimal day;
+    BigDecimal night;
+}
+
+@Getter
+class OpenWeatherMapCity {
+    String name;
 }
