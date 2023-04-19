@@ -1,4 +1,4 @@
-package mateuszwed.weatherForecastApi;
+package com.mateuszwed.weatherForecastApi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
