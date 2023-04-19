@@ -2,7 +2,9 @@ package com.mateuszwed.weatherForecastApi.client;
 
 import com.mateuszwed.weatherForecastApi.dto.OpenWeatherMapDto;
 import com.mateuszwed.weatherForecastApi.dto.WeatherForecastCity;
+import com.mateuszwed.weatherForecastApi.exception.EmptyWeatherForecastListException;
 import com.mateuszwed.weatherForecastApi.exception.HttpException;
+import com.mateuszwed.weatherForecastApi.exception.NotFoundWeatherForecastException;
 import com.mateuszwed.weatherForecastApi.mapper.WeatherMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -41,15 +43,13 @@ public class OpenWeatherMapClient {
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             throw new HttpException(e.getStatusCode(), "Problem with call to OpenWeatherMap");
         }
-        //todo add exception
-        var openWeatherMapDto = Optional.ofNullable(response.getBody()).orElseThrow();
+        var openWeatherMapDto = Optional.ofNullable(response.getBody())
+                .orElseThrow(() -> new NotFoundWeatherForecastException("Api response have null value"));
         var weatherForecastDtoList = weatherMapper.openWeatherMapDtoToWeatherForecastDtoList(openWeatherMapDto);
-        var weatherForecastCity = weatherMapper.openWeatherMapToWeatherForecastCity(openWeatherMapDto.getCity(), weatherForecastDtoList);
-        //todo add exception
-        if(weatherForecastCity == null){
-            throw new RuntimeException();
+        if(weatherForecastDtoList.isEmpty()) {
+            throw new EmptyWeatherForecastListException("Weather forecast list is empty");
         }
-        return weatherForecastCity;
+        return weatherMapper.openWeatherMapToWeatherForecastCity(openWeatherMapDto.getCity(), weatherForecastDtoList);
     }
 
     private HttpHeaders getHttpHeaders() {
