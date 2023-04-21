@@ -1,22 +1,22 @@
 package com.mateuszwed.weatherForecastApi.service;
 
-import com.mateuszwed.weatherForecastApi.dto.WeatherForecastCity;
-import com.mateuszwed.weatherForecastApi.exception.WrongCharacterFormatInCityName;
+import com.mateuszwed.weatherForecastApi.client.OpenWeatherMapClient;
+import com.mateuszwed.weatherForecastApi.dto.WeatherForecastDto;
+import com.mateuszwed.weatherForecastApi.exception.WrongCharacterFormatInCityNameException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import com.mateuszwed.weatherForecastApi.client.OpenWeatherMapClient;
 import org.springframework.stereotype.Service;
 
-@Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
+@Service
 public class WeatherService {
     OpenWeatherMapClient openWeatherMapClient;
 
-    public WeatherForecastCity getWeatherForecast(String city) {
+    public WeatherForecastDto getWeatherForecast(String city) {
         if(!city.matches("^[a-zA-Z]*$")){
-            throw new WrongCharacterFormatInCityName("The city name contains special characters or digits");
+            throw new WrongCharacterFormatInCityNameException("The city name contains special characters or digits");
         }
         return openWeatherMapClient.getWeatherForecast(city);
     }

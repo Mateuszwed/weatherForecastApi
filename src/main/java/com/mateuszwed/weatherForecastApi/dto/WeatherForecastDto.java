@@ -1,17 +1,14 @@
 package com.mateuszwed.weatherForecastApi.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.List;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class WeatherForecastDto {
-    double temperatureDay;
-    double temperatureNight;
-    double windSpeed;
-    int pressure;
-    int humidity;
-    String date;
+    String city;
+    List<WeatherDto> weather;
 }

@@ -1,16 +1,15 @@
 package com.mateuszwed.weatherForecastApi.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OpenWeatherMapDto {
-    OpenWeatherMapCityDto city;
-    List<OpenWeatherMapListDto> list;
+@Builder
+public class OpenWeatherMapTemperatureDto {
+    int day;
+    int night;
 }
-
