@@ -1,4 +1,4 @@
-package mateuszwed.weatherForecastApi.config;
+package com.mateuszwed.weatherForecastApi.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

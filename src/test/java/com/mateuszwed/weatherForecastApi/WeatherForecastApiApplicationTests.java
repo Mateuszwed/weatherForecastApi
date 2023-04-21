@@ -1,4 +1,4 @@
-package mateuszwed.weatherForecastApi;
+package com.mateuszwed.weatherForecastApi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,5 +9,4 @@ class WeatherForecastApiApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
